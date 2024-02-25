@@ -1,0 +1,185 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "Loop webservice",
+    "summary": "Loop webservice",
+    "description": "Loop webservice",
+    "termsOfService": "https://redcranelabs.com",
+    "contact": {
+      "name": "Redcrane",
+      "url": "https://redcranelabs.com",
+      "email": "info@redcranelabs.com"
+    },
+    "license": {
+      "url": "https://redcranelabs.com",
+      "name": "Unlicensed"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/api",
+      "description": "Local"
+    },
+    {
+      "url": "https://www.crane.red/api",
+      "description": "Development"
+    }
+  ],
+  "paths": {
+    "/v1/order/{id}/driver-earning": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get Driver Earning History",
+        "description": "Get Driver Earning History",
+        "operationId": "get-v1-order-id-driver-earning",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "type": "string"
+                    },
+                    "order": {
+                      "type": "string"
+                    },
+                    "search": {
+                      "type": "string"
+                    },
+                    "total_rows": {
+                      "type": "integer"
+                    },
+                    "total_pages": {
+                      "type": "integer"
+                    },
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "driver_account_id": {
+                            "type": "integer"
+                          },
+                          "driver_name": {
+                            "type": "string"
+                          },
+                          "driver_number": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "integer"
+                          },
+                          "staff_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:8000/api",
+            "description": "Local"
+          },
+          {
+            "url": "https://www.crane.red/api",
+            "description": "Development"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Order",
+      "description": "Order Management Service"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}
