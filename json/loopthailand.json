@@ -1,185 +1,231 @@
-{
-  "openapi": "3.1.0",
-  "info": {
-    "version": "1.0",
-    "title": "Loop webservice",
-    "summary": "Loop webservice",
-    "description": "Loop webservice",
-    "termsOfService": "https://redcranelabs.com",
-    "contact": {
-      "name": "Redcrane",
-      "url": "https://redcranelabs.com",
-      "email": "info@redcranelabs.com"
-    },
-    "license": {
-      "url": "https://redcranelabs.com",
-      "name": "Unlicensed"
-    }
-  },
-  "servers": [
-    {
-      "url": "http://localhost:8000/api",
-      "description": "Local"
-    },
-    {
-      "url": "https://www.crane.red/api",
-      "description": "Development"
-    }
-  ],
-  "paths": {
-    "/v1/order/{id}/driver-earning": {
-      "get": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Get Driver Earning History",
-        "description": "Get Driver Earning History",
-        "operationId": "get-v1-order-id-driver-earning",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer Token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Limit",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Order ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "limit": {
-                      "type": "integer"
-                    },
-                    "page": {
-                      "type": "integer"
-                    },
-                    "sort": {
-                      "type": "string"
-                    },
-                    "order": {
-                      "type": "string"
-                    },
-                    "search": {
-                      "type": "string"
-                    },
-                    "total_rows": {
-                      "type": "integer"
-                    },
-                    "total_pages": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "driver_account_id": {
-                            "type": "integer"
-                          },
-                          "driver_name": {
-                            "type": "string"
-                          },
-                          "driver_number": {
-                            "type": "string"
-                          },
-                          "created_at": {
-                            "type": "string"
-                          },
-                          "status": {
-                            "type": "string"
-                          },
-                          "price": {
-                            "type": "integer"
-                          },
-                          "staff_name": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ],
-        "servers": [
-          {
-            "url": "http://localhost:8000/api",
-            "description": "Local"
-          },
-          {
-            "url": "https://www.crane.red/api",
-            "description": "Development"
-          }
-        ]
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Order",
-      "description": "Order Management Service"
-    }
-  ],
-  "components": {
-    "securitySchemes": {
-      "Authorization": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    }
-  },
-  "security": [
-    {
-      "Authorization": []
-    }
-  ]
-}
+openapi: 3.1.0
+tags:
+  - name: Order
+    description: Order Management Service
+  - name: Driver
+    description: Driver Management Service
+x-stoplight:
+  id: tuej3y7r17jii
+info:
+  title: Loop webservice
+  version: '1.0'
+  description: Loop webservice
+  contact:
+    name: Redcrane
+    url: 'https://redcranelabs.com'
+    email: info@redcranelabs.com
+  license:
+    name: Unlicensed
+    url: 'https://redcranelabs.com'
+  termsOfService: 'https://redcranelabs.com'
+  summary: Loop webservice
+servers:
+  - url: 'http://localhost:8000/api'
+    description: Local
+  - url: 'https://www.crane.red/api'
+    description: Development
+paths:
+  '/v1/order/{id}/driver-earning':
+    get:
+      summary: Get Driver Earning History
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                  page:
+                    type: integer
+                  sort:
+                    type: string
+                  order:
+                    type: string
+                  search:
+                    type: string
+                  total_rows:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        driver_account_id:
+                          type: integer
+                        driver_name:
+                          type: string
+                        driver_number:
+                          type: string
+                        created_at:
+                          type: string
+                        status:
+                          type: string
+                        price:
+                          type: integer
+                        staff_name:
+                          type: string
+                x-examples:
+                  Example 1:
+                    limit: 50
+                    page: 1
+                    sort: created_at
+                    order: desc
+                    search: ''
+                    total_rows: 1
+                    total_pages: 1
+                    rows:
+                      - driver_account_id: 152
+                        driver_name: Kitti Watt
+                        driver_number: D0920230152
+                        created_at: '2023-11-08T15:05:28.00594Z'
+                        status: accept
+                        price: 600
+                        staff_name: ''
+      operationId: get-v1-order-id-driver-earning
+      x-stoplight:
+        id: lsnfonzwblumu
+      description: Get Driver Earning History
+      tags:
+        - Order
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: Page
+        - schema:
+            type: integer
+          in: query
+          name: limit
+          description: Limit
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Order ID
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        description: Bearer Token
+        required: true
+  '/v1/driver-job-history/{id}/price-detail':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Driver Job History ID
+    post:
+      summary: Update Price Detail in Driver Job
+      responses:
+        '204':
+          description: No Content
+      operationId: post-v1-driver-job-history-id-price-detail
+      x-stoplight:
+        id: smbmn2fbhxbjc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addon_driver_earning:
+                  type: number
+                  x-stoplight:
+                    id: 2yrkenssm1a47
+                addon_subsidy:
+                  type: number
+                  x-stoplight:
+                    id: 7fwqbbxgfgq3e
+                addon_labour:
+                  type: number
+                  x-stoplight:
+                    id: luv1336thyxhu
+                reimbursements:
+                  type: array
+                  x-stoplight:
+                    id: zxiv973c04arx
+                  items:
+                    x-stoplight:
+                      id: fhucrkvh6mmtb
+                    type: object
+                    additionalProperties: false
+                    properties:
+                      order_id:
+                        type: string
+                        x-stoplight:
+                          id: np9lfa1n6qg5q
+                      status:
+                        type: string
+                        x-stoplight:
+                          id: maz414jqjcklb
+                      type:
+                        type: string
+                        x-stoplight:
+                          id: lrf461eyg9sk3
+                      stage:
+                        type: string
+                        x-stoplight:
+                          id: tdcrx7dksizq7
+                      images:
+                        type: array
+                        x-stoplight:
+                          id: ygig8xc24vidc
+                        items:
+                          x-stoplight:
+                            id: 3v8ghnwufuaqe
+                          type: string
+                      amount:
+                        type: number
+                        x-stoplight:
+                          id: habyyqt9l8b3h
+                      editor:
+                        type: string
+                        x-stoplight:
+                          id: gj2tenbu4y8ua
+                      reject_reason:
+                        type: string
+                        x-stoplight:
+                          id: 97p42d96qsy2q
+                      created_at:
+                        type: string
+                        x-stoplight:
+                          id: yb1vljl1sm2vo
+                        format: date-time
+                      created_by:
+                        type: string
+                        x-stoplight:
+                          id: hqm6iftfo3f3d
+                      updated_at:
+                        type: string
+                        x-stoplight:
+                          id: mbi10y9qz6yyj
+      description: Update Price Detail in Driver Job History
+      tags:
+        - Driver
+components:
+  schemas: {}
+  requestBodies: {}
+  responses: {}
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+x-internal: true
+security:
+  - Authorization: []
